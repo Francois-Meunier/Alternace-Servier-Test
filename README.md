@@ -8,7 +8,8 @@
 
 ### Explication démarche
 
-> fichier datapipeline.py
+> fichier datapipeline.py<br>
+> Pour l'exécuter, entrer dans un terminal : python datapipeline.py
 
 La sortie de la data pipeline est un fichier qui donne des informations sur les médicament : dans quel type de revue ils ont été mentionnés (Pubmed ou Clinical trials par exemple), le titre de l'article, le nom du journal, ainsi que la date.<br>
 J'ai donc imaginé la strucutre du fichier de sortie comme un tableau de 5 colonnes : 
@@ -33,7 +34,8 @@ Toutes les fonctions sont commentées dans le code.<br>
 
 ### Traitement ad-hoc
 
-> fichier adhoc.py
+> fichier adhoc.py<br>
+> Pour l'exécuter (après datapipeline.py), entrer dans un terminal : python adhoc.py
 
 Le but est d'avoir le nom du journal qui mentionne le plus de médicaments différents.<br>
 En parcourant le dataframe, j'ai incrémenté un compteur de nombre de médicaments différents, pour chaque journal, puis il reste le max à retourner.<br>
@@ -44,8 +46,13 @@ N.B. Pour la partie python, j'ai laissé dans le répository le Jupyter Notebook
 
 - Quels sont les éléments à considérer pour faire évoluer votre code afin qu’il puisse gérer de grosses volumétries de données (fichiers de plusieurs To ou millions de fichiers par exemple) ?
 <br>
+Si l'on travaille de grands volumes de données, les boucles permettant le parcours des dataframes vont prendre davantage de temps à s'exécuter.<br>
+Il faudra rendre automatique la partie lecture des données, sans avoir à mettre le nom des fichiers dans le code.
 - Pourriez-vous décrire les modifications qu’il faudrait apporter, s’il y en a, pour prendre en considération de telles volumétries ?
 <br>
+Concernant la taille des fichiers, on pourrait les stocker en Parquet, cela afin de rendre la lecture plus rapide.<br>
+On pourrait également utiliser une base de donnée pour stocker nos données, et y avoir accès plus facilement qu'en chargeant un fichier csv.<br>
+Si en revanche les fichiers que l'on utilise contiennent de colonnes de données, vérifier si on ne peut pas en éliminer une partie, qui seraient inutiles. Ou encore convertir les types d'objets car certains encodages pandas prennent de la place inutilement.<br>
 
 ## SQL
 
@@ -75,7 +82,9 @@ Le résultat est groupé sur l'id client, par ordre décroissant.<br>
 
 Requête :
 ```
-SELECT client_id, SUM(CASE WHEN product_type='MEUBLE' THEN prod_qty*prod_price END) as ventes_meuble, SUM(CASE WHEN product_type='DECO' THEN prod_qty*prod_price END) as ventes_deco 
+SELECT client_id, 
+SUM(CASE WHEN product_type='MEUBLE' THEN prod_qty*prod_price END) as ventes_meuble, 
+SUM(CASE WHEN product_type='DECO' THEN prod_qty*prod_price END) as ventes_deco 
 FROM transactions LEFT JOIN product_nomenclature ON transactions.prop_id = product_nomenclature.product_id 
 WHERE date BETWEEN '2020-01-01' AND '2020-12-31'
 GROUP BY client_id DESC
