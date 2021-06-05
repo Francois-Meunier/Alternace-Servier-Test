@@ -14,11 +14,11 @@
 La sortie de la data pipeline est un fichier qui donne des informations sur les médicament : dans quel type de revue ils ont été mentionnés (Pubmed ou Clinical trials par exemple), le titre de l'article, le nom du journal, ainsi que la date.<br>
 J'ai donc imaginé la strucutre du fichier de sortie comme un tableau de 5 colonnes : 
 - drug : nom du médicament
-- category : le type de revue (base de donnée)
+- category : le type de revue (base de données)
 - title : titre de l'article
 - journal : le nom du journal
-- date : la date<br>
-<br>
+- date : la date
+
 Et donc une ligne est ajoutée à chaque fois qu'un médicament est mentionné, comprenant toutes les informations.<br>
 La règle est la suivante : un médicament est mentionné dans un artcile si il est présent dans le titre.<br>
 Donc pour chaque type de revue, on vérifie si le nom du médicament est présent dans le titre de chaque article. Si c'est le cas, on récupère 3 choses : le nom du médicament, le titre de l'article, le nom du journal, ainsi que la date.<br>
@@ -37,17 +37,17 @@ Toutes les fonctions sont commentées dans le code.<br>
 > fichier adhoc.py<br>
 > Pour l'exécuter (après datapipeline.py), entrer dans un terminal : python adhoc.py
 
-Le but est d'avoir le nom du journal qui mentionne le plus de médicaments différents.<br>
+Le but est d'obtenir le nom du journal qui mentionne le plus de médicaments différents.<br>
 En parcourant le dataframe, j'ai incrémenté un compteur de nombre de médicaments différents, pour chaque journal, puis il reste le max à retourner.<br>
 <br>
 N.B. Pour la partie python, j'ai laissé dans le répository le Jupyter Notebook dans lequel j'ai fais mes tests.<br>
 
 ### Pour aller plus loin
 
-- Quels sont les éléments à considérer pour faire évoluer votre code afin qu’il puisse gérer de grosses volumétries de données (fichiers de plusieurs To ou millions de fichiers par exemple) ?
+- Quels sont les éléments à considérer pour faire évoluer votre code afin qu’il puisse gérer de grosses volumétries de données (fichiers de plusieurs To ou millions de fichiers par exemple) ?<br>
 Si l'on travaille de grands volumes de données, les boucles permettant le parcours des dataframes vont prendre davantage de temps à s'exécuter.<br>
 Il faudra rendre automatique la partie lecture des données, sans avoir à mettre le nom des fichiers dans le code.<br><br>
-- Pourriez-vous décrire les modifications qu’il faudrait apporter, s’il y en a, pour prendre en considération de telles volumétries ?
+- Pourriez-vous décrire les modifications qu’il faudrait apporter, s’il y en a, pour prendre en considération de telles volumétries ?<br>
 Concernant la taille des fichiers, on pourrait les stocker en Parquet, cela afin de rendre la lecture plus rapide.<br>
 On pourrait également utiliser une base de donnée pour stocker nos données, et y avoir accès plus facilement qu'en chargeant un fichier csv.<br>
 Si en revanche les fichiers que l'on utilise contiennent de colonnes de données, vérifier si on ne peut pas en éliminer une partie, qui seraient inutiles. Ou encore convertir les types d'objets car certains encodages pandas prennent de la place inutilement.<br>
