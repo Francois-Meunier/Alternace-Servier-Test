@@ -39,10 +39,10 @@ def output_df(category,string_cat):
         
 ## lecture des données
 
-drugs = pd.read_csv("drugs.csv")
-pubmed = pd.read_csv("pubmed.csv")
-pubmed_json = pd.read_json('pubmed.json')
-clinical_trials = pd.read_csv("clinical_trials.csv")
+drugs = pd.read_csv("data/drugs.csv")
+pubmed = pd.read_csv("data/pubmed.csv")
+pubmed_json = pd.read_json('data/pubmed.json')
+clinical_trials = pd.read_csv("data/clinical_trials.csv")
 
 # concaténation des 2 df pubmed
 frames = [pubmed,pubmed_json]
