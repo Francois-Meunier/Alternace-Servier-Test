@@ -45,11 +45,9 @@ N.B. Pour la partie python, j'ai laissé dans le répository le Jupyter Notebook
 ### Pour aller plus loin
 
 - Quels sont les éléments à considérer pour faire évoluer votre code afin qu’il puisse gérer de grosses volumétries de données (fichiers de plusieurs To ou millions de fichiers par exemple) ?
-<br>
 Si l'on travaille de grands volumes de données, les boucles permettant le parcours des dataframes vont prendre davantage de temps à s'exécuter.<br>
-Il faudra rendre automatique la partie lecture des données, sans avoir à mettre le nom des fichiers dans le code.
+Il faudra rendre automatique la partie lecture des données, sans avoir à mettre le nom des fichiers dans le code.<br><br>
 - Pourriez-vous décrire les modifications qu’il faudrait apporter, s’il y en a, pour prendre en considération de telles volumétries ?
-<br>
 Concernant la taille des fichiers, on pourrait les stocker en Parquet, cela afin de rendre la lecture plus rapide.<br>
 On pourrait également utiliser une base de donnée pour stocker nos données, et y avoir accès plus facilement qu'en chargeant un fichier csv.<br>
 Si en revanche les fichiers que l'on utilise contiennent de colonnes de données, vérifier si on ne peut pas en éliminer une partie, qui seraient inutiles. Ou encore convertir les types d'objets car certains encodages pandas prennent de la place inutilement.<br>
